@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RELATÓRIO KIT COMUNICADO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            margin: 10px auto;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 5px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+        }
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        .data-item {
+            padding: 1px;
+            border: 1px solid #0056b3;
+            border-radius: 8px;
+            background-color: #f0f8ff;
+        }
+        .data-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <img src="logo.png" alt="Logo" , width="150" , height="60">
+    </div>
+
+    <div class="container">
+        <h1>RELATÓRIO KIT COMUNICADO</h1>
+
+        <div class="section">
+            <div class="section-title">Informações Gerais</div>
+            <div class="data-grid">
+                <div class="data-item">
+                    <label>Data de criação do relatório:</label>
+                    16 de agosto de 2024 às 13:30
+                </div>
+                <div class="data-item">
+                    <label>Fonte:</label>
+                    Transação UC20
+                </div>
+                <div class="data-item">
+                    <label>Tipo de Registro:</label>
+                    PEFIN
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Dados da Anotação</div>
+            <div class="data-grid">
+                <div class="data-item">
+                    <label>Tipo de Pessoa:</label>
+                    F - Fisica
+                </div>
+                <div class="data-item">
+                    <label>Nome:</label>
+                    Janclederson de Oliveiras
+                </div>
+                <div class="data-item">
+                    <label>Data de Nascimento do Devedor:</label>
+                    10/10/1994
+                </div>
+                <div class="data-item">
+                    <label>Documento do Devedor:</label>
+                    000002186025701
+                </div>
+                <div class="data-item">
+                    <label>Cód. da Natureza da Operação:</label>
+                    CT
+                </div>
+                <div class="data-item">
+                    <label>UF do Documento:</label>
+                    SSP
+                </div>
+                <div class="data-item">
+                    <label>Valor da Anotação:</label>
+                    63000
+                </div>
+                <div class="data-item">
+                    <label>Data da ocorrência:</label>
+                    27/10/2024
+                </div>
+                <div class="data-item">
+                    <label>Núm. do Comunicado:</label>
+                    4521533857
+                </div>
+                <div class="data-item">
+                    <label>Data do Comunicado:</label>
+                    22/05/2024
+                </div>
+                <div class="data-item">
+                    <label>Cód. do Participante do Convênio:</label>
+                    0
+                </div>
+                <div class="data-item">
+                    <label>Cód. da Agência do Participante:</label>
+                    2
+                </div>
+                <div class="data-item">
+                    <label>Subjúdice Relacionado a Ação Judicial:</label>
+                    0
+                </div>
+                <div class="data-item">
+                    <label>Monitoramento do Comunicado:</label>
+                    0
+                </div>
+                <div class="data-item">
+                    <label>Súmula 13:</label>
+                    0
+                </div>
+                <div class="data-item">
+                    <label>Súmula 385:</label>
+                    0
+                </div>
+                <div class="data-item">
+                    <label>Endereço do Devedor:</label>
+                    Rua José Pagani Zonda
+                </div>
+                <div class="data-item">
+                    <label>Bairro do Devedor:</label>
+                    Alameda das Árvores
+                </div>
+                <div class="data-item">
+                    <label>Cidade do Devedor:</label>
+                    São Paulo
+                </div>
+                <div class="data-item">
+                    <label>UF do Devedor:</label>
+                    SP
+                </div>
+                <div class="data-item">
+                    <label>CEP do Devedor:</label>
+                    13567-99x
+                </div>
+                <div class="data-item">
+                    <label>Data da Inclusão da Operação:</label>
+                    24/11/2024
+                </div>
+                <div class="data-item">
+                    <label>Nome do Pai do Devedor:</label>
+                    Juncleidson Silva de Sá
+                </div>
+                <div class="data-item">
+                    <label>Nome da Mãe do Devedor:</label>
+                    Cristinax De Silva Souza Santomé
+                </div>
+                <div class="data-item">
+                    <label>UF do RG:</label>
+                    SP
+                </div>
+                <div class="data-item">
+                    <label>Número do RG:</label>
+                    45421545265
+                </div>
+                <div class="data-item">
+                    <label>Data da Postagem:</label>
+                    2021/10/16
+                </div>
+                <div class="data-item">
+                    <label>Data da Inclusão da Anotação:</label>
+                    2021/10/16
+                </div>
+                <div class="data-item">
+                    <label>Data de Disponibilidade da Anotação:</label>
+                    2021/04/27
+                </div>
+                <div class="data-item">
+                    <label>Núm. do Processo:</label>
+                    214124214214
+                </div>
+                <div class="data-item">
+                    <label>Num. do Distribuidor:</label>
+                    122421112
+                </div>
+                <div class="data-item">
+                    <label>Código do Oficio:</label>
+                    N/A
+                </div>
+            </div>
+        </div>
+        <!-- Continuar com as outras seções conforme necessário -->
+    </div>
+    <div class="footer">
+        <p>© 2024 Nome da Empresa. Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>
