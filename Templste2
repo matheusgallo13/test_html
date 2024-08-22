@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página com Tabelas Profissionais</title>
+    <style>
+        /* Estilo Geral da Página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #343a40;
+        }
+
+        h1, h2 {
+            color: #343a40;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo das Tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Estilo Responsivo */
+        @media (max-width: 768px) {
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+
+            th, td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            th::before, td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-align: left;
+            }
+
+            th {
+                background-color: #343a40;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                display: block;
+                border-bottom: none;
+            }
+
+            tr:nth-child(even) {
+                background-color: transparent;
+            }
+
+            tr:hover {
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tabelas de Dados</h1>
+
+    <!-- Primeira Tabela -->
+    <h2>Tabela 1</h2>
+    <table>
+        <thead>
+            <tr>
+                <th data-label="QTDE">QTDE</th>
+                <th data-label="ANOTAÇÃO">ANOTAÇÃO</th>
+                <th data-label="PERÍODO">PERÍODO</th>
+                <th data-label="OCORRÊNCIA MAIS RECENTE">OCORRÊNCIA MAIS RECENTE</th>
+                <th data-label="LOCAL">LOCAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="QTDE"><!-- Valor QTDE --></td>
+                <td data-label="ANOTAÇÃO"><!-- Valor ANOTAÇÃO --></td>
+                <td data-label="PERÍODO"><!-- Valor PERÍODO --></td>
+                <td data-label="OCORRÊNCIA MAIS RECENTE"><!-- Valor OCORRÊNCIA MAIS RECENTE --></td>
+                <td data-label="LOCAL"><!-- Valor LOCAL --></td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+
+    <!-- Segunda Tabela -->
+    <h2>Tabela 2</h2>
+    <table>
+        <thead>
+            <tr>
+                <th data-label="Coluna 1">Coluna 1</th>
+                <th data-label="Coluna 2">Coluna 2</th>
+                <th data-label="Coluna 3">Coluna 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Coluna 1"><!-- Valor Coluna 1 --></td>
+                <td data-label="Coluna 2"><!-- Valor Coluna 2 --></td>
+                <td data-label="Coluna 3"><!-- Valor Coluna 3 --></td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+
+    <!-- Terceira Tabela -->
+    <h2>Tabela 3</h2>
+    <table>
+        <thead>
+            <tr>
+                <th data-label="Coluna A">Coluna A</th>
+                <th data-label="Coluna B">Coluna B</th>
+                <th data-label="Coluna C">Coluna C</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Coluna A"><!-- Valor Coluna A --></td>
+                <td data-label="Coluna B"><!-- Valor Coluna B --></td>
+                <td data-label="Coluna C"><!-- Valor Coluna C --></td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+
+</body>
+</html>
