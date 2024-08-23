@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Modern Table Layout</h1>
+
+    <div class="table-container">
+        <!-- Tabela 1 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Coluna 1</th>
+                    <th>Coluna 2</th>
+                    <th>Coluna 3</th>
+                    <th>Coluna 4</th>
+                    <th>Coluna 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dado 1</td>
+                    <td>Dado 2</td>
+                    <td>Dado 3</td>
+                    <td>Dado 4</td>
+                    <td>Dado 5</td>
+                </tr>
+                <tr>
+                    <td>Dado 6</td>
+                    <td>Dado 7</td>
+                    <td>Dado 8</td>
+                    <td>Dado 9</td>
+                    <td>Dado 10</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+        </table>
+
+        <!-- Tabela 2 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Coluna 1</th>
+                    <th>Coluna 2</th>
+                    <th>Coluna 3</th>
+                    <th>Coluna 4</th>
+                    <th>Coluna 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dado 1</td>
+                    <td>Dado 2</td>
+                    <td>Dado 3</td>
+                    <td>Dado 4</td>
+                    <td>Dado 5</td>
+                </tr>
+                <tr>
+                    <td>Dado 6</td>
+                    <td>Dado 7</td>
+                    <td>Dado 8</td>
+                    <td>Dado 9</td>
+                    <td>Dado 10</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+        </table>
+
+        <!-- Tabela 3 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Coluna 1</th>
+                    <th>Coluna 2</th>
+                    <th>Coluna 3</th>
+                    <th>Coluna 4</th>
+                    <th>Coluna 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dado 1</td>
+                    <td>Dado 2</td>
+                    <td>Dado 3</td>
+                    <td>Dado 4</td>
+                    <td>Dado 5</td>
+                </tr>
+                <tr>
+                    <td>Dado 6</td>
+                    <td>Dado 7</td>
+                    <td>Dado 8</td>
+                    <td>Dado 9</td>
+                    <td>Dado 10</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
