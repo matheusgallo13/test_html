@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PW3270-like System</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: "Courier New", Consolas, monospace;
+            color: black;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 4px; /* Reduzido para diminuir o espaço entre linhas e colunas */
+            text-align: left;
+            color: black;
+            font-size: 14px; /* Mantém o tamanho da fonte do cabeçalho */
+        }
+        /* Oculta as bordas das células e tabelas */
+        th, td, table {
+            border: none;
+        }
+        /* Ajusta o espaçamento entre linhas */
+        tr {
+            line-height: 1.2; /* Reduzido para diminuir o espaço entre linhas */
+        }
+        /* Estilo para os cabeçalhos das tabelas */
+        .table-header {
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: #f2f2f2; /* Leve destaque no fundo do cabeçalho */
+            padding: 6px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="table-header">Tabela 1 - Dados</div>
+    <table>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+        </tr>
+        <tr>
+            <td>Row 1, Col 1</td>
+            <td>Row 1, Col 2</td>
+            <td>Row 1, Col 3</td>
+            <td>Row 1, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Col 1</td>
+            <td>Row 2, Col 2</td>
+            <td>Row 2, Col 3</td>
+            <td>Row 2, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 3, Col 1</td>
+            <td>Row 3, Col 2</td>
+            <td>Row 3, Col 3</td>
+            <td>Row 3, Col 4</td>
+        </tr>
+    </table>
+
+    <div class="table-header">Tabela 2 - Informações</div>
+    <table>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+        </tr>
+        <tr>
+            <td>Row 1, Col 1</td>
+            <td>Row 1, Col 2</td>
+            <td>Row 1, Col 3</td>
+            <td>Row 1, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Col 1</td>
+            <td>Row 2, Col 2</td>
+            <td>Row 2, Col 3</td>
+            <td>Row 2, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 3, Col 1</td>
+            <td>Row 3, Col 2</td>
+            <td>Row 3, Col 3</td>
+            <td>Row 3, Col 4</td>
+        </tr>
+    </table>
+
+    <div class="table-header">Tabela 3 - Resumo</div>
+    <table>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+        </tr>
+        <tr>
+            <td>Row 1, Col 1</td>
+            <td>Row 1, Col 2</td>
+            <td>Row 1, Col 3</td>
+            <td>Row 1, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Col 1</td>
+            <td>Row 2, Col 2</td>
+            <td>Row 2, Col 3</td>
+            <td>Row 2, Col 4</td>
+        </tr>
+        <tr>
+            <td>Row 3, Col 1</td>
+            <td>Row 3, Col 2</td>
+            <td>Row 3, Col 3</td>
+            <td>Row 3, Col 4</td>
+        </tr>
+    </table>
+
+</body>
+</html>
