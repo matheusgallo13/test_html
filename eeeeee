@@ -1,0 +1,19 @@
+{% for produto, detalhes in detalhes.items() %}
+    <table>
+        <div class="table-header">{{ produto }}: qtd: {{ detalhes.qtd }}</div>
+        <tr>
+            {% if detalhes.anotacoes %}
+                {% for chave, valor in detalhes.anotacoes[0].items() %}
+                    <th data-label="coluna_{{ loop.index }}_key">{{ chave }}</th>
+                {% endfor %}
+            {% endif %}
+        </tr>
+        <tr>
+            {% if detalhes.anotacoes %}
+                {% for chave, valor in detalhes.anotacoes[0].items() %}
+                    <td data-label="coluna_{{ loop.index }}_value">{{ valor }}</td>
+                {% endfor %}
+            {% endif %}
+        </tr>
+    </table>
+{% endfor %}
