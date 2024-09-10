@@ -13,18 +13,15 @@
         </tr>
     </table>
 
-    {# Para cada produto dentro de "detalhes", criamos uma tabela #}
     {% for produto, detalhes in detalhes.items() %}
     <table>
         <div class="table-header">{{ produto }}: qtd: {{ detalhes.qtd }}</div>
         <tr>
-            {# Cria as colunas com as chaves do produto #}
             {% for chave, valor in detalhes.anotacoes[0].items() %}
             <th data-label="coluna_{{ loop.index }}_key">{{ chave }}</th>
             {% endfor %}
         </tr>
         <tr>
-            {# Cria as linhas com os valores das chaves do produto #}
             {% for chave, valor in detalhes.anotacoes[0].items() %}
             <td data-label="coluna_{{ loop.index }}_value">{{ valor }}</td>
             {% endfor %}
@@ -32,12 +29,10 @@
     </table>
     {% endfor %}
 
-    {# Tabela para "grafias" #}
     <table>
         <tr>
             <th>Grafias para o documento consultado: qtd: {{ grafias.qtd }}</th>
         </tr>
-        {# Para cada nome na lista de "nomes" #}
         {% for nome in grafias.nomes %}
         <tr>
             <td>{{ nome }}</td>
