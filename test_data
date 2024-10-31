@@ -1,0 +1,35 @@
+import pandas as pd
+
+# Dicionário fornecido
+data = {
+    "55555/44444/active_annotation.json": "<_io.BytesIO Object at 0121312321>",
+    "55555/44444/3/consulted_annotation/11111.json": "<_io.BytesIO Object at 0x211232321>",
+    "55555/44444/3/communication_letter/12345.pdf": "<_io.BytesIO Object at 0x21312321>",
+    "55555/44444/3/correios_protocol/54321.pdf": "<_io.BytesIO Object at 0121312321>",
+    "55555/44444/5/consulted_annotation/22222.json": "<_io.BytesIO Object at 0x211232321>",
+    "55555/44444/5/communication_letter/12345.pdf": "<_io.BytesIO Object at 0x21312321>",
+    "55555/44444/5/correios_protocol/54321.pdf": "<_io.BytesIO Object at 0121312321>",
+    "55555/44444/7/consulted_annotation/33333.pdf": "<_io.BytesIO Object at 0x21312321>",
+    "55555/44444/7/communication_letter/54321.json": "<_io.BytesIO Object at 0x211232321>",
+    "55555/44444/7/correios_protocol/67890.pdf": "<_io.BytesIO Object at 0121312321>",
+    "55555/44444/10/consulted_annotation/44444.pdf": "<_io.BytesIO Object at 0x21312321>",
+    "55555/44444/10/communication_letter/78654.json": "<_io.BytesIO Object at 0x211232321>",
+    "55555/44444/10/correios_protocol/58910.pdf": "<_io.BytesIO Object at 0121312321>",
+}
+
+# Preparando dados para o DataFrame
+df_data = []
+for path, io_object in data.items():
+    parts = path.split('/')
+    directory_1 = parts[0]
+    directory_2 = parts[1]
+    if len(parts) == 3:  # Caso para o arquivo na raiz
+        directory_3, folder, file = '', '', parts[2]
+    else:
+        directory_3 = parts[2]
+        folder = parts[3]
+        file = parts[4]
+    df_data.append([directory_1, directory_2, directory_3, folder, file, io_object])
+
+# Criando DataFrame
+df = pd.DataFrame(df_data, columns=["Directory_1", "Directory_2", "Directory_3", "Folder", "File", "BytesIO_Object"])
