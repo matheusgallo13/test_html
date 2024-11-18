@@ -7,12 +7,15 @@ def organize_dataframe(df):
 
     # Para cada grupo de 'register_id', vamos organizar os tipos conforme as regras
     for _, group in df.groupby('register_id'):
-        # Mantém o tipo 'communication_letter' apenas uma vez (o último)
+        # Separando os tipos
         group_without_comm_letter = group[group['type'] != 'communication_letter']
         group_with_comm_letter = group[group['type'] == 'communication_letter'].drop_duplicates(subset=['file'], keep='last')
         
-        # Junta os dois grupos
-        group_final = pd.concat([group_without_comm_letter, group_with_comm_letter])
+        # Para o tipo 'contracts', mantenha todos os itens de 'contracts' (não excluindo duplicados)
+        group_with_contracts = group[group['type'] == 'contracts']
+
+        # Combine tudo: group_without_comm_letter + group_with_comm_letter + group_with_contracts
+        group_final = pd.concat([group_without_comm_letter, group_with_comm_letter, group_with_contracts])
 
         # Adiciona o grupo final à lista de resultados
         result_list.append(group_final)
