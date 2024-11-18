@@ -1,16 +1,18 @@
-def organize_files(df):
-    # Primeiro, ordena pelo 'register_id' e 'line' para garantir que as linhas estejam em ordem
-    df['line_order'] = df['line'].apply(lambda x: str(x) if isinstance(x, str) else str(x))
-    df['line_order'] = df['line_order'].replace({
-        '7': '1',  # Prioridade mais alta
-        '3': '2',  # Prioridade intermediária
-        'preced_1': '3'  # Menor prioridade
-    })
+def organize_and_remove_duplicates(df):
+    """
+    Organiza os registros no DataFrame e remove duplicados dos tipos 'contracts' 
+    e 'communication_letter', mantendo apenas o último elemento por 'line' de cada tipo.
+    """
+    # Ordenar os registros por 'register_id' e 'line' de forma crescente
+    df = df.sort_values(by=['register_id', 'line'], ascending=[True, True])
     
-    # Ordena os tipos conforme a prioridade das linhas
-    df = df.sort_values(by=['register_id', 'line_order', 'type'], ascending=[True, True, True]).reset_index(drop=True)
+    # Remover duplicados para 'contracts' e 'communication_letter', mantendo o último por 'line'
+    df = df.groupby(['register_id', 'type'], group_keys=False).apply(
+        lambda group: group.sort_values('line', ascending=False).head(1)
+    )
+    
+    # Organizar o DataFrame novamente pela 'register_id' e 'line'
+    df = df.sort_values(by=['register_id', 'line'], ascending=[True, True])
 
-    # Remove a coluna temporária 'line_order'
-    df = df.drop(columns=['line_order'])
-
-    return df
+    # Retornar o DataFrame organizado, com as colunas originais
+    return df[['filename', 'register_id', 'line', 'type', 'file', 'bytesIO']]
