@@ -1,24 +1,16 @@
 def organize_files(df):
-    # Verifica se existem registros de 'contracts', se existir, realiza a operação
-    if 'contracts' in df['type'].values:
-        # Filtra os registros de 'contracts' e mantém apenas o último por 'register_id'
-        contracts_df = df[df['type'] == 'contracts']
-        contracts_last = contracts_df.drop_duplicates(subset=['register_id'], keep='last')
-        df = df[~df['type'].isin(['contracts'])]  # Remove os 'contracts' do DataFrame original
-        df = pd.concat([df, contracts_last])  # Junta o 'contracts' filtrado
+    # Primeiro, ordena pelo 'register_id' e 'line' para garantir que as linhas estejam em ordem
+    df['line_order'] = df['line'].apply(lambda x: str(x) if isinstance(x, str) else str(x))
+    df['line_order'] = df['line_order'].replace({
+        '7': '1',  # Prioridade mais alta
+        '3': '2',  # Prioridade intermediária
+        'preced_1': '3'  # Menor prioridade
+    })
+    
+    # Ordena os tipos conforme a prioridade das linhas
+    df = df.sort_values(by=['register_id', 'line_order', 'type'], ascending=[True, True, True]).reset_index(drop=True)
 
-    # Verifica se existem registros de 'communication_letter', se existir, realiza a operação
-    if 'communication_letter' in df['type'].values:
-        # Filtra os registros de 'communication_letter' e mantém apenas o último por 'register_id'
-        communication_letter_df = df[df['type'] == 'communication_letter']
-        communication_letter_last = communication_letter_df.drop_duplicates(subset=['register_id'], keep='last')
-        df = df[~df['type'].isin(['communication_letter'])]  # Remove os 'communication_letter' do DataFrame original
-        df = pd.concat([df, communication_letter_last])  # Junta o 'communication_letter' filtrado
-
-    # Ordena pelo 'register_id' e pela 'line' para manter a sequência correta
-    df = df.sort_values(by=['register_id', 'line']).reset_index(drop=True)
+    # Remove a coluna temporária 'line_order'
+    df = df.drop(columns=['line_order'])
 
     return df
-
-# Suponha que o seu DataFrame original seja 'df'
-df_organizado = organize_files(df)
