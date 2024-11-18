@@ -1,0 +1,36 @@
+import pandas as pd
+
+def organizar_dataframe_por_blocos(df):
+    """
+    Organiza o dataframe, priorizando blocos relacionados de 'contracts' e 'communication_letter'
+    e movendo duplicados para o final.
+
+    Parâmetros:
+    df (pd.DataFrame): O dataframe original.
+
+    Retorna:
+    pd.DataFrame: O dataframe reorganizado.
+    """
+    # Identificar linhas com duplicatas em 'contracts'
+    duplicados_contracts = df[df['type'] == 'contracts'].duplicated(subset=['file'], keep=False)
+    lines_contracts_duplicados = df.loc[duplicados_contracts, 'line'].unique()
+
+    # Separar blocos duplicados de 'contracts'
+    blocos_contracts = df[df['line'].isin(lines_contracts_duplicados)]
+    df_sem_contracts = df[~df['line'].isin(lines_contracts_duplicados)]
+
+    # Identificar linhas com duplicatas em 'communication_letter'
+    duplicados_communication = df_sem_contracts[df_sem_contracts['type'] == 'communication_letter'].duplicated(subset=['file'], keep=False)
+    lines_communication_duplicados = df_sem_contracts.loc[duplicados_communication, 'line'].unique()
+
+    # Separar blocos duplicados de 'communication_letter'
+    blocos_communication = df_sem_contracts[df_sem_contracts['line'].isin(lines_communication_duplicados)]
+    df_restante = df_sem_contracts[~df_sem_contracts['line'].isin(lines_communication_duplicados)]
+
+    # Combinar os blocos na nova ordem:
+    # 1. Blocos relacionados por contratos e cartas de comunicação na sequência.
+    # 2. Blocos duplicados em 'contracts'.
+    # 3. Blocos duplicados em 'communication_letter'.
+    dataframe_organizado = pd.concat([df_restante, blocos_contracts, blocos_communication], ignore_index=True)
+
+    return dataframe_organizado
