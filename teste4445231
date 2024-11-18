@@ -1,24 +1,18 @@
-def organize_dataframe(df):
-    # Ordena o DataFrame primeiro pela coluna 'line' e depois pela coluna 'type'
-    df = df.sort_values(by=['line', 'type'])
+def remove_duplicates_contracts(df):
+    # Primeiro, identifique as linhas de 'contracts' e remova duplicados, mantendo o último
+    contracts_df = df[df['type'] == 'contracts']
+    contracts_last = contracts_df.drop_duplicates(subset=['register_id'], keep='last')
 
-    # Inicia a lista para armazenar os grupos processados
-    result_list = []
+    # Agora, excluímos os contratos duplicados do DataFrame original
+    df_without_contracts = df[df['type'] != 'contracts']
 
-    # Para cada grupo de 'register_id', vamos organizar os tipos conforme as regras
-    for _, group in df.groupby('register_id'):
-        # Separando os tipos
-        group_without_comm_letter = group[group['type'] != 'communication_letter']
-        group_with_comm_letter = group[group['type'] == 'communication_letter'].drop_duplicates(subset=['file'], keep='last')
-        
-        # Para o tipo 'contracts', mantenha todos os itens de 'contracts' (não excluindo duplicados)
-        group_with_contracts = group[group['type'] == 'contracts']
+    # Junte o DataFrame sem contratos com os contratos "últimos"
+    df_final = pd.concat([df_without_contracts, contracts_last])
 
-        # Combine tudo: group_without_comm_letter + group_with_comm_letter + group_with_contracts
-        group_final = pd.concat([group_without_comm_letter, group_with_comm_letter, group_with_contracts])
+    # Ordena pelo 'register_id' e pela 'line' para manter a sequência correta
+    df_final = df_final.sort_values(by=['register_id', 'line']).reset_index(drop=True)
+    
+    return df_final
 
-        # Adiciona o grupo final à lista de resultados
-        result_list.append(group_final)
-
-    # Concatena todos os grupos organizados e retorna o DataFrame final
-    return pd.concat(result_list).reset_index(drop=True)
+# Suponha que o seu DataFrame original seja 'df'
+df_organizado = remove_duplicates_contracts(df)
