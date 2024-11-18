@@ -1,18 +1,24 @@
-def remove_duplicates_contracts(df):
-    # Primeiro, identifique as linhas de 'contracts' e remova duplicados, mantendo o último
-    contracts_df = df[df['type'] == 'contracts']
-    contracts_last = contracts_df.drop_duplicates(subset=['register_id'], keep='last')
+def organize_files(df):
+    # Verifica se existem registros de 'contracts', se existir, realiza a operação
+    if 'contracts' in df['type'].values:
+        # Filtra os registros de 'contracts' e mantém apenas o último por 'register_id'
+        contracts_df = df[df['type'] == 'contracts']
+        contracts_last = contracts_df.drop_duplicates(subset=['register_id'], keep='last')
+        df = df[~df['type'].isin(['contracts'])]  # Remove os 'contracts' do DataFrame original
+        df = pd.concat([df, contracts_last])  # Junta o 'contracts' filtrado
 
-    # Agora, excluímos os contratos duplicados do DataFrame original
-    df_without_contracts = df[df['type'] != 'contracts']
-
-    # Junte o DataFrame sem contratos com os contratos "últimos"
-    df_final = pd.concat([df_without_contracts, contracts_last])
+    # Verifica se existem registros de 'communication_letter', se existir, realiza a operação
+    if 'communication_letter' in df['type'].values:
+        # Filtra os registros de 'communication_letter' e mantém apenas o último por 'register_id'
+        communication_letter_df = df[df['type'] == 'communication_letter']
+        communication_letter_last = communication_letter_df.drop_duplicates(subset=['register_id'], keep='last')
+        df = df[~df['type'].isin(['communication_letter'])]  # Remove os 'communication_letter' do DataFrame original
+        df = pd.concat([df, communication_letter_last])  # Junta o 'communication_letter' filtrado
 
     # Ordena pelo 'register_id' e pela 'line' para manter a sequência correta
-    df_final = df_final.sort_values(by=['register_id', 'line']).reset_index(drop=True)
-    
-    return df_final
+    df = df.sort_values(by=['register_id', 'line']).reset_index(drop=True)
+
+    return df
 
 # Suponha que o seu DataFrame original seja 'df'
-df_organizado = remove_duplicates_contracts(df)
+df_organizado = organize_files(df)
