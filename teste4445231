@@ -1,18 +1,27 @@
-def process_group(group):
-    # Para cada 'type' que pode ter múltiplos arquivos, remover duplicados de 'communication_letter' e 'contracts'
-    if 'communication_letter' in group['type'].values:
-        group = group[group['type'] != 'communication_letter'].append(group[group['type'] == 'communication_letter'].drop_duplicates(subset=['file'], keep='last'))
-    
-    if 'contracts' in group['type'].values:
-        group = group[group['type'] != 'contracts'].append(group[group['type'] == 'contracts'].drop_duplicates(subset=['file'], keep='last'))
+import pandas as pd
 
-    return group
+def organize_dataframe(df):
+    # Garantir que 'line' seja tratada como string para ordenar corretamente
+    df['line'] = df['line'].apply(str)
 
-# Agrupar os dados por 'register_id' e 'line', e aplicar a função de processamento
-result_df = df.groupby(['filename', 'register_id', 'line'], group_keys=False).apply(process_group)
+    # Ordenar os dados pela coluna 'line' e 'type' para garantir a ordem correta
+    df = df.sort_values(by=['line', 'type', 'file'])
 
-# Resetar o índice para um formato mais limpo
-result_df = result_df.reset_index(drop=True)
+    # Função para remover duplicados e manter o último arquivo para tipos específicos
+    def process_group(group):
+        # Para cada 'type' que pode ter múltiplos arquivos, remover duplicados de 'communication_letter' e 'contracts'
+        if 'communication_letter' in group['type'].values:
+            group = group[group['type'] != 'communication_letter'].append(group[group['type'] == 'communication_letter'].drop_duplicates(subset=['file'], keep='last'))
+        
+        if 'contracts' in group['type'].values:
+            group = group[group['type'] != 'contracts'].append(group[group['type'] == 'contracts'].drop_duplicates(subset=['file'], keep='last'))
 
-# Exibir o resultado final
-print(result_df)
+        return group
+
+    # Agrupar os dados por 'filename', 'register_id' e 'line', e aplicar a função de processamento
+    result_df = df.groupby(['filename', 'register_id', 'line'], group_keys=False).apply(process_group)
+
+    # Resetar o índice para um formato mais limpo
+    result_df = result_df.reset_index(drop=True)
+
+    return result_df
