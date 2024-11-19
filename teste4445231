@@ -8,6 +8,9 @@ def organize_dataframe(df):
     Retorno:
         pd.DataFrame: DataFrame organizado.
     """
+    # Garantir que a coluna 'line' seja tratada como string para uniformidade
+    df['line'] = df['line'].astype(str)
+
     # Encontrar os arquivos duplicados no tipo 'communication_letter'
     dup_files = df[df['type'] == 'communication_letter']['file']
     dup_lines = df[df['file'].isin(dup_files)]['line'].unique()
@@ -18,7 +21,7 @@ def organize_dataframe(df):
     # Selecionar as últimas ocorrências de 'communication_letter', 'correios_protocol' e 'contracts'
     last_entries = (
         df[df['line'].isin(dup_lines)]
-        .sort_values('line', ascending=False)
+        .sort_values('line', ascending=False, key=lambda x: x.str.extract(r'(\d+)$').fillna(0).astype(int))
         .drop_duplicates(subset=['type'], keep='first')
     )
 
@@ -28,6 +31,8 @@ def organize_dataframe(df):
     ])]
 
     # Concatenar o resultado final
-    result = pd.concat([non_dup_lines, last_entries]).sort_values('line').reset_index(drop=True)
+    result = pd.concat([non_dup_lines, last_entries]).sort_values(
+        'line', key=lambda x: x.str.extract(r'(\d+)$').fillna(0).astype(int)
+    ).reset_index(drop=True)
 
     return result
