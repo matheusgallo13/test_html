@@ -1,18 +1,18 @@
-def organize_and_remove_duplicates(df):
-    """
-    Organiza os registros no DataFrame e remove duplicados dos tipos 'contracts' 
-    e 'communication_letter', mantendo apenas o último elemento por 'line' de cada tipo.
-    """
-    # Ordenar os registros por 'register_id' e 'line' de forma crescente
-    df = df.sort_values(by=['register_id', 'line'], ascending=[True, True])
+def organize_dataframe(df):
+    # Criar prioridade baseada na ordem de aparição dos valores na coluna 'line'
+    line_priority = {line: idx for idx, line in enumerate(df['line'].unique())}
     
-    # Remover duplicados para 'contracts' e 'communication_letter', mantendo o último por 'line'
-    df = df.groupby(['register_id', 'type'], group_keys=False).apply(
-        lambda group: group.sort_values('line', ascending=False).head(1)
-    )
+    # Adicionando uma coluna de prioridade dinâmica
+    df['priority'] = df['line'].map(line_priority)
     
-    # Organizar o DataFrame novamente pela 'register_id' e 'line'
-    df = df.sort_values(by=['register_id', 'line'], ascending=[True, True])
-
-    # Retornar o DataFrame organizado, com as colunas originais
-    return df[['filename', 'register_id', 'line', 'type', 'file', 'bytesIO']]
+    # Agrupar por 'type' e 'file' e selecionar a linha com menor prioridade
+    grouped = df.groupby(['type', 'file'], group_keys=False)
+    df_filtered = grouped.apply(lambda x: x.loc[x['priority'].idxmin()])
+    
+    # Ordenar pelo campo de prioridade e, opcionalmente, por outros campos
+    df_filtered = df_filtered.sort_values(by=['priority', 'type'])
+    
+    # Remover a coluna auxiliar 'priority' antes de retornar
+    df_filtered = df_filtered.drop(columns=['priority'])
+    
+    return df_filtered.reset_index(drop=True)
