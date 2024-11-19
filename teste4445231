@@ -21,8 +21,10 @@ def organize_dataframe(df):
     # Selecionar as últimas ocorrências de 'communication_letter', 'correios_protocol' e 'contracts'
     last_entries = (
         df[df['line'].isin(dup_lines)]
-        .sort_values('line', ascending=False, key=lambda x: x.str.extract(r'(\d+)$').fillna(0).astype(int))
+        .assign(line_numeric=lambda x: x['line'].str.extract(r'(\d+)$').iloc[:, 0].fillna(0).astype(int))
+        .sort_values('line_numeric', ascending=False)
         .drop_duplicates(subset=['type'], keep='first')
+        .drop(columns='line_numeric')  # Remover a coluna auxiliar
     )
 
     # Filtrar apenas os tipos de interesse na remoção de duplicados
@@ -31,8 +33,8 @@ def organize_dataframe(df):
     ])]
 
     # Concatenar o resultado final
-    result = pd.concat([non_dup_lines, last_entries]).sort_values(
-        'line', key=lambda x: x.str.extract(r'(\d+)$').fillna(0).astype(int)
-    ).reset_index(drop=True)
+    result = pd.concat([non_dup_lines, last_entries]).assign(
+        line_numeric=lambda x: x['line'].str.extract(r'(\d+)$').iloc[:, 0].fillna(0).astype(int)
+    ).sort_values('line_numeric').drop(columns='line_numeric').reset_index(drop=True)
 
     return result
