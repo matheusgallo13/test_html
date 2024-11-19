@@ -1,18 +1,23 @@
 def organize_dataframe(df):
-    # Criar prioridade baseada na ordem de aparição dos valores na coluna 'line'
+    # Criar prioridade baseada na ordem de aparição dos valores únicos na coluna 'line'
     line_priority = {line: idx for idx, line in enumerate(df['line'].unique())}
     
-    # Adicionando uma coluna de prioridade dinâmica
+    # Adicionar a coluna de prioridade com base na ordem das linhas
     df['priority'] = df['line'].map(line_priority)
     
-    # Agrupar por 'type' e 'file' e selecionar a linha com menor prioridade
-    grouped = df.groupby(['type', 'file'], group_keys=False)
-    df_filtered = grouped.apply(lambda x: x.loc[x['priority'].idxmin()])
-    
-    # Ordenar pelo campo de prioridade e, opcionalmente, por outros campos
-    df_filtered = df_filtered.sort_values(by=['priority', 'type'])
-    
-    # Remover a coluna auxiliar 'priority' antes de retornar
+    # Criar uma função para selecionar o menor índice de prioridade
+    def select_min_priority(group):
+        # Retornar as linhas com menor prioridade para cada combinação de 'type' e 'file'
+        return group.loc[group['priority'].idxmin()]
+
+    # Agrupar por 'type' e 'file' e aplicar a função de seleção
+    df_filtered = df.groupby(['type', 'file'], group_keys=False).apply(select_min_priority)
+
+    # Remover a coluna auxiliar de prioridade
     df_filtered = df_filtered.drop(columns=['priority'])
-    
+
+    # Ordenar pelo campo de prioridade original e 'type'
+    df_filtered = df_filtered.sort_values(by=['line', 'type'], key=lambda col: col.map(line_priority.get))
+
+    # Redefinir o índice e retornar
     return df_filtered.reset_index(drop=True)
